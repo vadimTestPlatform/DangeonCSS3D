@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.93f19d78.svg" />
+  <link rel="icon" type="image/ico" href="./assets/favicon.62426866.ico" />
+  <link rel="preload" as="image" href="./assets/scrollopenedTexture.637e130d.webp">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dungeon</title>
+  <script type="module" crossorigin src="./assets/index.a20ab2c1.js"></script>
+  <link rel="stylesheet" href="./assets/index.d6e2923a.css">
+</head>
+
+<body>
+  <section id="loadingScreen">
+    <img id="loadingScreen_spiderIcon" src="./assets/spiderIcon.71dd2655.webp">
+    <div id="loadingScreenClickText" class="hide"></div>
+  </section>
+  <section id="menu" class="hide">
+    <section id="mainMenuWrap">
+      <button class="menu_button" action="startGame">
+        play
+        <div class="menu_button_inner"></div>
+      </button>
+      <!-- <button class="menu_button" action="about">
+        about
+        <div class="menu_button_inner"></div>
+      </button> -->
+      <button class="menu_button" action="openControlsSubPanel">
+        controls
+        <div class="menu_button_inner"></div>
+      </button>
+    </section>
+    <section id="menuBg">
+      <div class="backwardWall wall">
+        <div class="torchWrap torch-type2 torchWrap1">
+          <div class="fireWrap">
+            <div class="fireElem fireElem3">
+              <div class="firePiece firePiece1"></div>
+              <div class="firePiece firePiece2"></div>
+              <div class="firePiece firePiece3"></div>
+            </div>
+            <div class="fireElem fireElem1">
+              <div class="firePiece firePiece1"></div>
+              <div class="firePiece firePiece2"></div>
+            </div>
+            <div class="fireElem fireElem2">
+              <div class="firePiece firePiece1"></div>
+              <div class="firePiece firePiece2"></div>
+            </div>
+          </div>
+          <div class="baseWrap">
+            <div class="baseElem baseElem1"></div>
+            <div class="baseElem baseElem2"></div>
+            <div class="baseElem baseElem3"></div>
+            <div class="baseElem baseElem4"></div>
+            <div class="baseElem baseElem5"></div>
+          </div>
+          <div class="torchShadow"></div>
+        </div>
+      </div>
+    </section>
+  </section>
+  <svg id="defsSvg">
+    <defs>
+      <filter id="teleportFilter">
+        <feTurbulence type="turbulence" baseFrequency="0.01" numOctaves="3" seed="1" result="turbulence">
+          <animate attributeName="baseFrequency" values="0.01;0.005;0.01" dur="30s" begin="0"
+            repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="30" xChannelSelector="R" yChannelSelector="B"
+          result="displacement" />
+      </filter>
+      <image id="teleportImage" href="./assets/teleportImage.3942bada.webp" x="0" y="0" height="100%" width="100%"
+        preserveAspectRatio="xMidYMid" />
+    </defs>
+  </svg>
+  <section id="gameSection" class="hide">
+    <div id="sceneScreen"></div>
+    <div id="lvl1EndScreen" class="hide">
+      <img class="wallFlag" src="./assets/wallFlag.99794446.webp">
+      <span class="text">
+        Hope you enjoy this little adventure
+      </span>
+      <div class="close"> reload </div>
+    </div>
+    <section id='viewport'>
+      <section id='camera'>
+        <section id='scenesWrap'>
+          <section id="lvl1" class="lvlWrap">
+            <section id='room1' class='room'>
+              <div class="leftWall wall"></div>
+              <div class="rightWall wall"></div>
+              <div class="bottomWall wall"></div>
+              <div class="topWall wall"></div>
+              <div class="backwardWall wall"></div>
+              <div class="forwardWall wall"></div>
+              <img class="roomObj wallCloth1" src="./assets/cloth1.7195d4fc.webp">
+              <img class="roomObj wallCloth2" src="./assets/cloth1.7195d4fc.webp">
+              <img class="roomObj wallCloth3" src="./assets/cloth2.7378b58b.webp">
+              <div class="wallBtnWrap">
+                <div class="topElem wallBtnElem"></div>
+                <div class="leftElem wallBtnElem"></div>
+                <div class="rightElem wallBtnElem"></div>
+                <div class="bottomElem wallBtnElem"></div>
+                <div class="forwardElem wallBtnElem">
+                  <img class="symbol" src="./assets/magicSymbol1.6502626e.webp">
+                </div>
+              </div>
+              <div class="spiderWall spiderWall1 wall"></div>
+            </section>
+            <section id='room2' class='room'>
+              <div class="lightBeam"></div>
+              <div class="leftWall wall"></div>
+              <div class="rightWall wall"></div>
+              <div class="bottomWall wall"></div>
+              <div class="topWall wall">
+                <img class="beamCrackTexture" src="./assets/crackTexture.541d9e90.webp">
+              </div>
+              <div class="backwardWall wall">
+                <div class="torchWrap torch-type2 torchWrap1">
+                  <div class="fireWrap">
+                    <div class="fireElem fireElem3">
+                      <div class="firePiece firePiece1"></div>
+                      <div class="firePiece firePiece2"></div>
+                      <div class="firePiece firePiece3"></div>
+                    </div>
+                    <div class="fireElem fireElem1">
+                      <div class="firePiece firePiece1"></div>
+                      <div class="firePiece firePiece2"></div>
+                    </div>
+                    <div class="fireElem fireElem2">
+                      <div class="firePiece firePiece1"></div>
+                      <div class="firePiece firePiece2"></div>
+                    </div>
+                  </div>
+                  <div class="baseWrap">
+                    <div class="baseElem baseElem1"></div>
+                    <div class="baseElem baseElem2"></div>
+                    <div class="baseElem baseElem3"></div>
+                    <div class="baseElem baseElem4"></div>
+                    <div class="baseElem baseElem5"></div>
+                  </div>
+                  <div class="torchShadow"></div>
+                </div>
+              </div>
+              <img class="roomObj wallCloth1" src="./assets/cloth1.7195d4fc.webp">
+              <div class="spiderWall spiderWall1 wall"></div>
+              <img class="scroll1 scrollItem roomObj" src="./assets/scrollTexture1.54692e0f.webp">
+              <img class="spell1 roomObj" src="./assets/healSpell.81d0f5f8.webp">
+              <div class="spiderWall spiderWall2 wall"></div>
+              <div class="bugWrap bugWrap1 moving roomObj">
+                <div class="bugTop bugElem"></div>
+                <div class="bugAntennaeWrap bugElem">
+                  <div class="bugAntennae1 bugAntennae bugElem"></div>
+                  <div class="bugAntennae2 bugAntennae bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap1 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap2 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap3 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap4 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+              </div>
+              <div class="boxObj boxObj1 squareBox roomObj">
+                <div class="topEdge boxEdge"></div>
+                <div class="bottomEdge boxEdge"></div>
+                <div class="rightEdge boxEdge"></div>
+                <div class="leftEdge boxEdge"></div>
+                <div class="forwardEdge boxEdge"></div>
+                <div class="backwardEdge boxEdge"></div>
+              </div>
+              <div class="boxObj boxObj2 squareBox roomObj">
+                <div class="topEdge boxEdge"></div>
+                <div class="bottomEdge boxEdge"></div>
+                <div class="rightEdge boxEdge"></div>
+                <div class="leftEdge boxEdge"></div>
+                <div class="forwardEdge boxEdge"></div>
+                <div class="backwardEdge boxEdge"></div>
+              </div>
+              <div class="boxObj boxObj3 squareBox roomObj">
+                <div class="topEdge boxEdge"></div>
+                <div class="bottomEdge boxEdge"></div>
+                <div class="rightEdge boxEdge"></div>
+                <div class="leftEdge boxEdge"></div>
+                <div class="forwardEdge boxEdge"></div>
+                <div class="backwardEdge boxEdge"></div>
+                <div class="boxInner1 roomObj"></div>
+                <div class="boxInner2 roomObj"></div>
+                <img class="boxContent" src="./assets/pikachuIcon.1139101f.webp">
+              </div>
+              <div class="bugWrap bugWrap2 roomObj">
+                <div class="bugTop bugElem"></div>
+                <div class="bugAntennaeWrap bugElem">
+                  <div class="bugAntennae1 bugAntennae bugElem"></div>
+                  <div class="bugAntennae2 bugAntennae bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap1 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap2 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap3 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap4 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+              </div>
+            </section>
+            <section id='room3' class='room'>
+              <div class="leftWall wall"></div>
+              <div class="rightWall wall"></div>
+              <div class="bottomWall wall"></div>
+              <div class="topWall wall">
+                <img class="beamCrackTexture" src="./assets/crackTexture.541d9e90.webp">
+              </div>
+              <div class="backwardWall wall"></div>
+              <svg class="teleportWrap">
+                <use class="teleport" href="#teleportImage" />
+              </svg>
+              <div class="protectionOpacityWallWrap wall">
+                <div class="protectionOpacityWall wall"></div>
+                <img class="wallSymbol" src="./assets/magicSymbol1.6502626e.webp">
+              </div>
+              <img class="scroll1 scrollItem roomObj" src="./assets/scrollTexture1.54692e0f.webp">
+              <img class="wallFlag1 wallFlag roomObj" src="./assets/wallFlag.99794446.webp">
+              <img class="wallFlag2 wallFlag roomObj" src="./assets/wallFlag.99794446.webp">
+            </section>
+            <section id='room4' class='room'>
+              <div class="leftWall wall">
+                <div class="lightBeam"></div>
+              </div>
+              <div class="bottomWall wall"></div>
+              <div class="topWall wall"></div>
+              <img class="roomObj wallCloth1" src="./assets/cloth2.7378b58b.webp">
+              <img class="roomObj wallCloth2" src="./assets/cloth3.d6b11ee4.webp">
+              <img class="spell1 roomObj" src="./assets/bugSpell2.bda0ba00.webp">
+              <div class="spiderWall spiderWall1 wall"></div>
+              <div class="spiderWall spiderWall2 wall"></div>
+              <div class="bugWrap bugWrap1 roomObj">
+                <div class="bugTop bugElem"></div>
+                <div class="bugAntennaeWrap bugElem">
+                  <div class="bugAntennae1 bugAntennae bugElem"></div>
+                  <div class="bugAntennae2 bugAntennae bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap1 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap2 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap3 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap4 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+              </div>
+            </section>
+            <section id='room5' class='room'>
+              <div class="leftWall wall">
+                <div class="torchWrap torch-type2 torchWrap1">
+                  <div class="fireWrap">
+                    <div class="fireElem fireElem3">
+                      <div class="firePiece firePiece1"></div>
+                      <div class="firePiece firePiece2"></div>
+                      <div class="firePiece firePiece3"></div>
+                    </div>
+                    <div class="fireElem fireElem1">
+                      <div class="firePiece firePiece1"></div>
+                      <div class="firePiece firePiece2"></div>
+                    </div>
+                    <div class="fireElem fireElem2">
+                      <div class="firePiece firePiece1"></div>
+                      <div class="firePiece firePiece2"></div>
+                    </div>
+                  </div>
+                  <div class="baseWrap">
+                    <div class="baseElem baseElem1"></div>
+                    <div class="baseElem baseElem2"></div>
+                    <div class="baseElem baseElem3"></div>
+                    <div class="baseElem baseElem4"></div>
+                  </div>
+                  <div class="torchShadow"></div>
+                </div>
+              </div>
+              <div class="rightWall wall"></div>
+              <div class="bottomWall wall"></div>
+              <div class="topWall wall"></div>
+              <div class="forwardWall wall">
+                <div class="spiderWall spiderWall1 wall"></div>
+                <div class="spiderWall spiderWall2 wall"></div>
+                <div class="spiderWall spiderWall3 wall"></div>
+              </div>
+              <div class="bulkWallWrap wall">
+                <div class="bulkForwardWall wall"></div>
+                <div class="bulkBackwardWall wall">
+                  <img class="symbol" src="./assets/magicSymbol1.6502626e.webp">
+                </div>
+                <div class="bulkLeftWall wall"></div>
+              </div>
+              <img class="swordItem1 roomObj" src="./assets/swordItem.7a9a6f9d.webp">
+              <img class="shieldItem1 roomObj" src="./assets/shieldItem.c3f7557a.webp">
+              <div class="bugWrap bugWrap1 roomObj">
+                <div class="bugTop bugElem"></div>
+                <div class="bugAntennaeWrap bugElem">
+                  <div class="bugAntennae1 bugAntennae bugElem"></div>
+                  <div class="bugAntennae2 bugAntennae bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap1 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap2 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap3 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap4 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+              </div>
+              <div class="bugWrap bugWrap2 roomObj">
+                <div class="bugTop bugElem"></div>
+                <div class="bugAntennaeWrap bugElem">
+                  <div class="bugAntennae1 bugAntennae bugElem"></div>
+                  <div class="bugAntennae2 bugAntennae bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap1 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap2 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap3 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap4 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+              </div>
+              <div class="bugWrap bugWrap3 moving roomObj">
+                <div class="bugTop bugElem"></div>
+                <div class="bugAntennaeWrap bugElem">
+                  <div class="bugAntennae1 bugAntennae bugElem"></div>
+                  <div class="bugAntennae2 bugAntennae bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap1 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap2 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap3 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+                <div class="bugLegWrap bugLegWrap4 bugElem">
+                  <div class="bugLegInner bugElem"></div>
+                </div>
+              </div>
+              <div class="wallBtnWrap">
+                <div class="topElem wallBtnElem"></div>
+                <div class="leftElem wallBtnElem"></div>
+                <div class="rightElem wallBtnElem"></div>
+                <div class="bottomElem wallBtnElem"></div>
+                <div class="forwardElem wallBtnElem">
+                  <img class="symbol" src="./assets/magicSymbol1.6502626e.webp">
+                </div>
+              </div>
+            </section>
+          </section>
+        </section>
+      </section>
+    </section>
+    <div id="openedScrollWrap">
+      <div id="openedScroll">
+        <div id="scrollContentWrap"></div>
+      </div>
+    </div>
+    <div id="playerHandsWrap">
+      <div id="playerHandsInner">
+        <img id="playerHands" class="hide" src="./assets/playerHands2.09bac93d.webp">
+      </div>
+    </div>
+    <!-- <section id="devSection">
+      <div id="realPosWrap">
+        <div>
+          x: <span id="realXElem"></span>
+        </div>
+        <div>
+          y: <span id="realYElem"></span>
+        </div>
+        <div>
+          z: <span id="realZElem"></span>
+        </div>
+      </div>
+    </section> -->
+    <section id="UISection" class="hide">
+      <img id="pointerLockInaccessibleIcon" class="hide" src="./assets/lockIcon.12b4cef2.webp">
+      <div id="manaBar" class="bar"></div>
+      <div id="hpBar" class="bar"></div>
+      <div id="movementBar" class="bar hide"></div>
+      <div id="bugSpell" class="bar hide"></div>
+      <div id="healSpell" class="bar hide"></div>
+      <div id="activeItemTips" class="hide"></div>
+      <div id="infoIcon"></div>
+    </section>
+    <section id="bugViewSection"></section>
+  </section>
+  <section id="subPanelsSection" class="hide">
+    <section id="controlsSection" class="subPanel hide">
+      <img id="controlsImage" src="./assets/controls.3a1bd996.webp">
+      <div class="subPanelsSection_closeButton" panel="controlsSection"> close </div>
+    </section>
+  </section>
+  
+</body>
+
+</html>
