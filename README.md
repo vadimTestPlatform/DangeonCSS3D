@@ -7,4 +7,5 @@
 *  :ant: bugs and fps drops are also avalible
   
 
-##### Have Fun
+##### Have Fun:
+<a href="https://vadimtestplatform.github.io/DangeonCSS3D/"/> pages link </a>
